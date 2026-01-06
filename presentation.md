@@ -10,6 +10,8 @@ themeSet: ./dark-pro.css
 
 ## Document-Based Databases
 
+**Presented by:** Roland Fornvald, Jonas Hinterdorfer, Zsombor Matyas, David Naderer, Simon Wögerbauer
+
 ---
 
 # Ablauf
