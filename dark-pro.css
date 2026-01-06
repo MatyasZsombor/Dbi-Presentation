@@ -1,0 +1,319 @@
+/* @theme dark-pro */
+@import "default";
+
+/* ================================
+   Data Banks Dark Theme for Marp
+   ================================ */
+
+:root {
+  --primary: #00d4ff;        /* Cyan */
+  --secondary: #8a2be2;      /* Blue violet */
+  --accent: #ff6b9d;         /* Pink */
+  --background: #0a0e17;     /* Deep navy */
+  --surface: #1a2236;         /* Card/surface */
+  --text: #e6f1ff;           /* Light blue-white */
+  --text-secondary: #a8b2d1;
+  --success: #00ff9d;        /* Green */
+  --warning: #ffcc00;        /* Yellow */
+
+  /* Code block colors */
+  --code-bg: #0f172a;
+  --code-keyword: #ff79c6;   /* Pink-magenta keywords */
+  --code-string: #50fa7b;    /* Green strings */
+  --code-number: #bd93f9;    /* Purple numbers */
+  --code-comment: #6272a4;   /* Blue-gray comments */
+  --code-function: #8be9fd;  /* Cyan functions */
+  --code-operator: #ffb86c;  /* Orange operators */
+  --code-constant: #ff5555;  /* Red constants */
+  --code-key: #ffb86c;       /* Orange keys (bold) */
+  --code-punctuation: #8be9fd; /* Cyan braces, colons, commas */
+}
+
+/* ================================
+   Section / Background
+   ================================ */
+section {
+  background: radial-gradient(
+    ellipse at top left,
+    #0a0e17 0%,
+    #0c1425 40%,
+    #0a1122 100%
+  );
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  padding: 70px 90px;
+  position: relative;
+}
+
+section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+section > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ================================
+   Headings
+   ================================ */
+h1 {
+  font-size: 3.2em;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.3em;
+  display: inline-block;
+  position: relative;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 2px;
+}
+
+h2 {
+  color: var(--primary);
+  font-size: 2.3em;
+  font-weight: 700;
+  margin: 1.5em 0 0.8em;
+  border-left: 4px solid var(--secondary);
+  padding-left: 20px;
+}
+
+h3 {
+  color: var(--text);
+  font-size: 1.7em;
+  font-weight: 600;
+  margin: 1.2em 0 0.6em;
+  background: linear-gradient(90deg, rgba(0, 212, 255, 0.1), transparent);
+  padding: 10px 20px;
+  border-radius: 0 8px 8px 0;
+}
+
+/* ================================
+   Text
+   ================================ */
+p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 1.1em;
+  margin-bottom: 1.2em;
+}
+
+.data-stat {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 1.2em;
+  background: rgba(0, 212, 255, 0.1);
+  padding: 3px 10px;
+  border-radius: 4px;
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.bank-term {
+  color: var(--secondary);
+  border-bottom: 2px dotted var(--secondary);
+  font-weight: 600;
+}
+
+/* ================================
+   Lists
+   ================================ */
+ul, ol {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+ul li {
+  position: relative;
+  padding-left: 1.6em;
+  margin-bottom: 0.8em;
+}
+
+ul li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  line-height: 1;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+ol {
+  counter-reset: data-counter;
+}
+
+ol li {
+  counter-increment: data-counter;
+  position: relative;
+  padding-left: 2.2em;
+  margin-bottom: 0.8em;
+}
+
+ol li::before {
+  content: counter(data-counter);
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 50%;
+  background: rgba(138, 43, 226, 0.15);
+  color: var(--secondary);
+  font-weight: 700;
+  font-size: 0.85em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================================
+   Tables
+   ================================ */
+table {
+  width: 100%;
+  border-collapse: collapse !important;
+  border-spacing: 0;
+  margin: 2em 0;
+  background: var(--surface);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  display: table !important;
+}
+
+th, td {
+  border: 1px solid rgba(0, 212, 255, 0.2) !important;
+  padding: 15px 20px !important;
+}
+
+th {
+  background: linear-gradient(135deg, var(--secondary), #6a11cb) !important;
+  color: white !important;
+  font-weight: 600;
+  text-align: left;
+  font-size: 1.1em;
+  border-bottom: 2px solid rgba(0, 212, 255, 0.3) !important;
+}
+
+td {
+  color: var(--text-secondary) !important;
+  transition: background-color 0.2s;
+}
+
+tbody tr:nth-child(even) { background-color: rgba(0, 212, 255, 0.05) !important; }
+tbody tr:nth-child(odd) { background-color: rgba(26, 34, 54, 0.5) !important; }
+tr:hover td { background-color: rgba(0, 212, 255, 0.1) !important; }
+
+/* ================================
+   Code Blocks (Marp & highlight.js)
+   ================================ */
+code,
+pre code {
+  background: var(--code-bg) !important;
+  color: var(--text) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+  font-size: 0.95em !important;
+  border: none !important; /* remove inner border */
+}
+
+pre {
+  background: var(--code-bg) !important;
+  border-left: 4px solid var(--secondary) !important;
+  padding: 20px !important;
+  margin: 1.5em 0 !important;
+  border-radius: 0 8px 8px 0 !important;
+  overflow: auto !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.95em !important;
+  color: var(--text) !important;
+}
+
+/* Syntax highlighting for highlight.js */
+.hljs-keyword   { color: var(--code-keyword) !important; font-weight: bold; }
+.hljs-string    { color: var(--code-string) !important; }
+.hljs-number    { color: var(--code-number) !important; }
+.hljs-comment   { color: var(--code-comment) !important; font-style: italic; }
+.hljs-function  { color: var(--code-function) !important; }
+.hljs-operator  { color: var(--code-operator) !important; }
+.hljs-constant  { color: var(--code-constant) !important; }
+.hljs-punctuation { color: var(--code-punctuation) !important; } /* braces, colons, commas */
+.hljs-attr      { color: var(--code-key) !important; font-weight: bold; } /* JSON keys */
+
+/* ================================
+   Blockquotes
+   ================================ */
+blockquote {
+  border-left: 4px solid var(--accent);
+  padding: 25px 30px;
+  margin: 2em 0;
+  background: linear-gradient(90deg, rgba(255, 107, 157, 0.05), transparent);
+  border-radius: 0 10px 10px 0;
+  font-style: italic;
+}
+
+/* ================================
+   Footer & Header
+   ================================ */
+footer {
+  position: absolute;
+  bottom: 25px;
+  left: 90px;
+  right: 90px;
+  font-size: 0.85em;
+  color: rgba(168, 178, 209, 0.5);
+  border-top: 1px solid rgba(0, 212, 255, 0.1);
+  padding-top: 15px;
+}
+
+header {
+  position: absolute;
+  top: 25px;
+  left: 90px;
+  right: 90px;
+  font-size: 0.9em;
+  color: var(--text-secondary);
+}
+
+/* ================================
+   Slide Numbers
+   ================================ */
+section::after {
+  content: attr(data-marpit-pagination);
+  position: absolute;
+  bottom: 30px;
+  right: 90px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 212, 255, 0.1);
+  color: var(--primary);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
