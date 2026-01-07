@@ -3,6 +3,7 @@ using Elastic.Clients.Elasticsearch.Core.Bulk;
 using Elastic.Clients.Elasticsearch.Core.Search;
 using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Clients.Elasticsearch.Mapping;
+using Elastic.Clients.Elasticsearch.Security;
 using ElasticSearch;
 using ElasticSearch.Models;
 using Microsoft.Extensions.Logging;
@@ -243,6 +244,52 @@ public partial class ElasticsearchService(
         
         var avgViewsAgg = search.Aggregations?.GetAverage("average_views")?.Value ?? 0.0;
         return avgViewsAgg;
+    }
+
+    public async Task<Dictionary<string, long>> GetMostCommonTags(int size = 10)
+    {
+        var searchResponse = await userClient.Client.SearchAsync<WebPage>(s => s
+            .Indices(DefaultIndex)
+            .Size(0)
+            .Aggregations(a =>
+                a.Add("pages_per_tag", descriptor => descriptor
+                    .Terms(t => t
+                        .Field(f => f.Tags)
+                        .Size(size)
+                        .AddOrder(new Field("_count"), SortOrder.Desc)
+                    )
+                )
+            )
+        );
+        
+        var termsAgg = searchResponse.Aggregations?.GetStringTerms("pages_per_tag");
+        if (termsAgg == null)
+        {
+            return new Dictionary<string, long>();
+        }
+        return termsAgg.Buckets.ToDictionary(
+            bucket => bucket.Key.ToString(),
+            bucket => bucket.DocCount);
+    }
+
+    public async Task<List<WebPage>> FindPagesWithHighlyLikedComments(int minLikes = 5)
+    {
+        var searchResponse = await userClient.Client.SearchAsync<WebPage>(s => s
+            .Indices(DefaultIndex)
+            .Query(q => q
+                .Nested(n => n
+                    .Path(p => p.Comments)
+                    .Query(nq => nq
+                        .Range(r => r
+                            .Number(c => c
+                                .Field(f => f.Comments.First().Likes).Gte(minLikes)
+                            )
+                        )
+                    )
+                )
+            )
+        );
+        return searchResponse.Documents.ToList();
     }
     
     public async Task<bool> IsAlive()
