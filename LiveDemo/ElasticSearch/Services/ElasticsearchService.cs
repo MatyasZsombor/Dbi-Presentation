@@ -4,7 +4,6 @@ using Elastic.Clients.Elasticsearch.Core.Search;
 using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Clients.Elasticsearch.Mapping;
 using Elastic.Clients.Elasticsearch.QueryDsl;
-using Elastic.Clients.Elasticsearch.Security;
 using ElasticSearch;
 using ElasticSearch.Models;
 using Microsoft.Extensions.Logging;
@@ -12,7 +11,7 @@ using ExistsResponse = Elastic.Clients.Elasticsearch.IndexManagement.ExistsRespo
 
 namespace Elasticsearch.Services;
 
-public partial class ElasticsearchService(
+public class ElasticsearchService(
     ILogger<ElasticsearchService> logger,
     AdminElasticsearchClient adminClient,
     UserElasticsearchClient userClient)
@@ -80,6 +79,12 @@ public partial class ElasticsearchService(
             new EventId(10, nameof(IsAlive)),
             "Elasticsearch health check failed");
 
+    private static readonly Action<ILogger, string, Exception?> LogElasticsearchQuery =
+        LoggerMessage.Define<string>(
+            LogLevel.Information,
+            new EventId(11, "ElasticsearchQuery"),
+            "Elasticsearch Query: {Query}");
+
     public string DefaultIndex => adminClient.Client.ElasticsearchClientSettings.DefaultIndex;
 
     public async Task<List<WebPage>> SearchContent(string query)
@@ -94,6 +99,7 @@ public partial class ElasticsearchService(
             ).Size(1000)
         );
 
+        LogElasticsearchQuery(logger, searchResponse.DebugInformation, null);
         return searchResponse.Documents.ToList();
     }
     
@@ -109,6 +115,7 @@ public partial class ElasticsearchService(
             ).Size(1000)
         );
 
+        LogElasticsearchQuery(logger, searchResponse.DebugInformation, null);
         return searchResponse.Documents.ToList();
     }
 
@@ -129,6 +136,8 @@ public partial class ElasticsearchService(
                 )
             ).Size(1000)
         );
+
+        LogElasticsearchQuery(logger, searchResponse.DebugInformation, null);
         return searchResponse.Documents.ToList();
     }
 
@@ -160,6 +169,7 @@ public partial class ElasticsearchService(
             .Size(1000)
         );
 
+        LogElasticsearchQuery(logger, searchResponse.DebugInformation, null);
 
         return searchResponse.Hits
             .Where(hit => hit.Source != null)
@@ -198,7 +208,8 @@ public partial class ElasticsearchService(
             )
             .Size(1000)
         );
-        
+
+        LogElasticsearchQuery(logger, searchResponse.DebugInformation, null);
         return searchResponse.Documents.ToList();
     }
 
@@ -218,7 +229,8 @@ public partial class ElasticsearchService(
                 )
             )
         );
-        
+
+        LogElasticsearchQuery(logger, searchResponse.DebugInformation, null);
         return searchResponse.Documents.ToList();
     }
 
@@ -242,7 +254,8 @@ public partial class ElasticsearchService(
                     )
             )
         );
-        
+
+        LogElasticsearchQuery(logger, search.DebugInformation, null);
         var avgViewsAgg = search.Aggregations?.GetAverage("average_views")?.Value ?? 0.0;
         return avgViewsAgg;
     }
@@ -262,7 +275,8 @@ public partial class ElasticsearchService(
                 )
             )
         );
-        
+
+        LogElasticsearchQuery(logger, searchResponse.DebugInformation, null);
         var termsAgg = searchResponse.Aggregations?.GetStringTerms("pages_per_tag");
         if (termsAgg == null)
         {
@@ -291,6 +305,8 @@ public partial class ElasticsearchService(
             )
             .Size(1000)
         );
+
+        LogElasticsearchQuery(logger, searchResponse.DebugInformation, null);
         return searchResponse.Documents.ToList();
     }
 
@@ -310,7 +326,8 @@ public partial class ElasticsearchService(
             )
             .Size(1000)
         );
-        
+
+        LogElasticsearchQuery(logger, searchResponse.DebugInformation, null);
         return searchResponse.Documents.ToList();
     }
     
