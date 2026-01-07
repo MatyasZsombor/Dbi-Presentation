@@ -5,7 +5,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace LiveDemo;
 
-public class DemoRunner(IServiceScopeFactory scopeFactory) : IHostedService
+public class DemoRunner(IServiceScopeFactory scopeFactory, IHostApplicationLifetime appLifetime) : IHostedService
 {
     private static readonly JsonSerializerOptions JsonSerializerOptions = new()
     {
@@ -25,6 +25,7 @@ public class DemoRunner(IServiceScopeFactory scopeFactory) : IHostedService
         
         PrintHeader();
         await RunDemo(elasticsearchService);
+        appLifetime.StopApplication();
     }
     
     public Task StopAsync(CancellationToken cancellationToken)

@@ -21,7 +21,6 @@ internal static class Program
         var host = Host.CreateDefaultBuilder(args)
             .ConfigureAppConfiguration((_, config) =>
             {
-                // Add your custom configuration here
                 config.SetBasePath(AppContext.BaseDirectory)
                       .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
             })
@@ -30,7 +29,6 @@ internal static class Program
                 var configuration = context.Configuration;
                 services.AddSingleton(configuration);
                 
-                // Load webpages synchronously since we can't have async in ConfigureServices
                 var webPages = LoadWebpages();
                 services.AddSingleton(webPages);
                 
