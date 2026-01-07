@@ -1,0 +1,7 @@
+﻿services:
+  livedemo:
+    image: livedemo
+    build:
+      context: .
+      dockerfile: LiveDemo/Dockerfile
+    network_mode: "host"
