@@ -1,0 +1,54 @@
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.2.3
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=true
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+    networks:
+      - backend
+
+  kibana-init:
+    image: curlimages/curl:latest
+    container_name: kibana-init
+    depends_on:
+      - elasticsearch
+    entrypoint: >
+      sh -c "
+        echo Waiting for Elasticsearch...;
+        until curl -s -u elastic:${ELASTIC_PASSWORD} http://elasticsearch:9200/_cluster/health?wait_for_status=yellow > /dev/null; do
+          echo waiting; sleep 5;
+        done;
+        echo Creating Kibana users and backend users...;
+        curl -s -u elastic:${ELASTIC_PASSWORD} -X POST http://elasticsearch:9200/_security/user/${KIBANA_SYSTEM_USER} -H 'Content-Type: application/json' -d '{\"password\":\"${KIBANA_SYSTEM_PASSWORD}\",\"roles\":[\"kibana_system\"],\"full_name\":\"Kibana System User\"}';
+        curl -s -u elastic:${ELASTIC_PASSWORD} -X POST http://elasticsearch:9200/_security/user/${KIBANA_UI_USER} -H 'Content-Type: application/json' -d '{\"password\":\"${KIBANA_UI_PASSWORD}\",\"roles\":[\"superuser\"],\"full_name\":\"Kibana UI User\"}';
+        curl -s -u elastic:${ELASTIC_PASSWORD} -X POST http://elasticsearch:9200/_security/role/backend_readwrite -H 'Content-Type: application/json' -d '{\"indices\":[{\"names\":[\"register-platform-*\"],\"privileges\":[\"read\",\"write\"]}]}';
+        curl -s -u elastic:${ELASTIC_PASSWORD} -X POST http://elasticsearch:9200/_security/user/${BACKEND_RW_USER} -H 'Content-Type: application/json' -d '{\"password\":\"${BACKEND_RW_PASSWORD}\",\"roles\":[\"backend_readwrite\"],\"full_name\":\"Backend Read/Write User\"}';
+        curl -s -u elastic:${ELASTIC_PASSWORD} -X POST http://elasticsearch:9200/_security/role/backend_admin -H 'Content-Type: application/json' -d '{\"cluster\":[\"manage_index_templates\",\"monitor\",\"manage\"],\"indices\":[{\"names\":[\"*\"],\"privileges\":[\"all\"]}]}';
+        curl -s -u elastic:${ELASTIC_PASSWORD} -X POST http://elasticsearch:9200/_security/user/${BACKEND_ADMIN_USER} -H 'Content-Type: application/json' -d '{\"password\":\"${BACKEND_ADMIN_PASSWORD}\",\"roles\":[\"backend_admin\"],\"full_name\":\"Backend Admin User\"}';
+        echo Users setup complete."
+    networks:
+      - backend
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:9.2.3
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - ELASTICSEARCH_USERNAME=${KIBANA_SYSTEM_USER}
+      - ELASTICSEARCH_PASSWORD=${KIBANA_SYSTEM_PASSWORD}
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+      - kibana-init
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
