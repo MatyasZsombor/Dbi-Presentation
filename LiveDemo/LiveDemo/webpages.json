@@ -5,7 +5,7 @@
     "Content": "Learn the basics of Elasticsearch, including indexing, querying, and aggregations.",
     "Tags": ["elasticsearch", "tutorial", "search"],
     "Views": 120,
-    "PublishedDate": "2026-01-01T10:00:00Z",
+    "PublishedDate": "2026-01-04T15:00:00Z",
     "Comments": [
       {"User": "Alice", "Text": "Great tutorial!", "Likes": 5},
       {"User": "Bob", "Text": "Very clear explanations.", "Likes": 3}
@@ -17,7 +17,7 @@
     "Content": "Explore how AI improves search relevance and ranking in modern search engines.",
     "Tags": ["AI", "search", "technology"],
     "Views": 350,
-    "PublishedDate": "2026-01-02T12:30:00Z",
+    "PublishedDate": "2026-01-05T08:30:00Z",
     "Comments": [
       {"User": "Carol", "Text": "Amazing insights!", "Likes": 4},
       {"User": "Dave", "Text": "I learned a lot.", "Likes": 2},
@@ -30,7 +30,7 @@
     "Content": "A step-by-step guide on visualizing your Elasticsearch data with dashboards.",
     "Tags": ["elasticsearch", "kibana", "visualization"],
     "Views": 200,
-    "PublishedDate": "2026-01-03T08:45:00Z",
+    "PublishedDate": "2026-01-05T16:45:00Z",
     "Comments": []
   },
   {
@@ -39,7 +39,7 @@
     "Content": "Best practices for scaling your Elasticsearch cluster for high availability and performance.",
     "Tags": ["elasticsearch", "cluster", "scaling"],
     "Views": 180,
-    "PublishedDate": "2026-01-04T14:20:00Z",
+    "PublishedDate": "2026-01-06T02:20:00Z",
     "Comments": [
       {"User": "Frank", "Text": "Helpful tips!", "Likes": 3}
     ]
@@ -47,10 +47,10 @@
   {
     "Title": "Introduction to Full-Text Search",
     "Url": "https://example.com/full-text",
-    "Content": "Understand how full-text search works and why it’s important for modern applications.",
+    "Content": "Understand how full-text search works and why it's important for modern applications.",
     "Tags": ["search", "full-text", "tutorial"],
     "Views": 95,
-    "PublishedDate": "2026-01-05T09:15:00Z",
+    "PublishedDate": "2026-01-06T09:15:00Z",
     "Comments": []
   },
   {
@@ -59,7 +59,7 @@
     "Content": "An overview of the Elastic Stack components: Elasticsearch, Kibana, Beats, and Logstash.",
     "Tags": ["elasticsearch", "elastic stack", "overview"],
     "Views": 140,
-    "PublishedDate": "2026-01-06T11:00:00Z",
+    "PublishedDate": "2026-01-07T07:30:00Z",
     "Comments": [
       {"User": "George", "Text": "Nice summary!", "Likes": 2},
       {"User": "Hannah", "Text": "Very clear.", "Likes": 3}
@@ -71,7 +71,7 @@
     "Content": "Learn how to use aggregations to calculate metrics like average, sum, and counts in Elasticsearch.",
     "Tags": ["elasticsearch", "aggregations", "analytics"],
     "Views": 210,
-    "PublishedDate": "2026-01-07T16:40:00Z",
+    "PublishedDate": "2026-01-07T08:00:00Z",
     "Comments": [
       {"User": "Ivy", "Text": "Very useful example.", "Likes": 4}
     ]
@@ -82,7 +82,7 @@
     "Content": "Understand how Elasticsearch analyzers and tokenizers process text for indexing and searching.",
     "Tags": ["elasticsearch", "analyzer", "tokenizer"],
     "Views": 130,
-    "PublishedDate": "2026-01-08T10:10:00Z",
+    "PublishedDate": "2026-01-04T10:10:00Z",
     "Comments": []
   },
   {
@@ -91,7 +91,7 @@
     "Content": "Learn best practices for securing your Elasticsearch cluster, including authentication and encryption.",
     "Tags": ["elasticsearch", "security", "best practices"],
     "Views": 170,
-    "PublishedDate": "2026-01-09T13:25:00Z",
+    "PublishedDate": "2026-01-04T13:25:00Z",
     "Comments": [
       {"User": "Jack", "Text": "Important info!", "Likes": 5},
       {"User": "Karen", "Text": "Thanks for sharing.", "Likes": 2}
@@ -103,7 +103,7 @@
     "Content": "An introduction to Elasticsearch Query DSL for building complex queries.",
     "Tags": ["elasticsearch", "query", "DSL"],
     "Views": 220,
-    "PublishedDate": "2026-01-10T09:50:00Z",
+    "PublishedDate": "2026-01-05T09:50:00Z",
     "Comments": []
   },
   {
@@ -112,7 +112,7 @@
     "Content": "Learn the difference between full-text and keyword fields in Elasticsearch and when to use each.",
     "Tags": ["elasticsearch", "fields", "text"],
     "Views": 110,
-    "PublishedDate": "2026-01-11T12:00:00Z",
+    "PublishedDate": "2026-01-05T12:00:00Z",
     "Comments": [
       {"User": "Leo", "Text": "Good explanation!", "Likes": 3},
       {"User": "Mia", "Text": "Very clear.", "Likes": 2}
@@ -124,7 +124,7 @@
     "Content": "How to model nested objects in Elasticsearch to represent complex relationships.",
     "Tags": ["elasticsearch", "nested", "data modeling"],
     "Views": 150,
-    "PublishedDate": "2026-01-12T08:30:00Z",
+    "PublishedDate": "2026-01-06T08:30:00Z",
     "Comments": []
   },
   {
@@ -133,7 +133,7 @@
     "Content": "Monitor your infrastructure and applications using the Elastic Observability stack.",
     "Tags": ["elastic", "observability", "monitoring"],
     "Views": 190,
-    "PublishedDate": "2026-01-13T15:20:00Z",
+    "PublishedDate": "2026-01-01T15:20:00Z",
     "Comments": [
       {"User": "Nina", "Text": "Very helpful!", "Likes": 4},
       {"User": "Oscar", "Text": "I like this overview.", "Likes": 2}
@@ -145,7 +145,7 @@
     "Content": "How to efficiently index large datasets using Elasticsearch Bulk API.",
     "Tags": ["elasticsearch", "bulk", "performance"],
     "Views": 200,
-    "PublishedDate": "2026-01-14T10:05:00Z",
+    "PublishedDate": "2026-01-02T10:05:00Z",
     "Comments": []
   },
   {
@@ -154,7 +154,7 @@
     "Content": "Implement highlighting in search results to emphasize matching terms.",
     "Tags": ["elasticsearch", "highlighting", "search"],
     "Views": 175,
-    "PublishedDate": "2026-01-15T11:45:00Z",
+    "PublishedDate": "2026-01-03T11:45:00Z",
     "Comments": [
       {"User": "Paul", "Text": "Exactly what I needed.", "Likes": 3},
       {"User": "Quinn", "Text": "Great example.", "Likes": 2}
@@ -166,7 +166,7 @@
     "Content": "Tips and tricks to scale your Elasticsearch indices efficiently for large datasets.",
     "Tags": ["elasticsearch", "scaling", "performance"],
     "Views": 160,
-    "PublishedDate": "2026-01-16T09:30:00Z",
+    "PublishedDate": "2026-01-03T09:30:00Z",
     "Comments": []
   },
   {
@@ -175,7 +175,7 @@
     "Content": "Understand how Elasticsearch calculates relevance scores for search results.",
     "Tags": ["elasticsearch", "scoring", "search"],
     "Views": 140,
-    "PublishedDate": "2026-01-17T13:10:00Z",
+    "PublishedDate": "2026-01-04T13:10:00Z",
     "Comments": [
       {"User": "Rachel", "Text": "Good breakdown.", "Likes": 4}
     ]
@@ -186,7 +186,7 @@
     "Content": "Best practices for managing time-based indices in Elasticsearch.",
     "Tags": ["elasticsearch", "time-based", "indices"],
     "Views": 130,
-    "PublishedDate": "2026-01-18T08:00:00Z",
+    "PublishedDate": "2026-01-05T08:00:00Z",
     "Comments": []
   },
   {
@@ -195,7 +195,7 @@
     "Content": "How to index, query, and analyze logs using Elasticsearch and the Elastic Stack.",
     "Tags": ["elasticsearch", "logs", "monitoring"],
     "Views": 210,
-    "PublishedDate": "2026-01-19T14:25:00Z",
+    "PublishedDate": "2026-01-02T14:25:00Z",
     "Comments": [
       {"User": "Steve", "Text": "Useful guide!", "Likes": 5},
       {"User": "Tina", "Text": "Well explained.", "Likes": 3}
@@ -207,7 +207,7 @@
     "Content": "Implement search suggestions and autocomplete features in Elasticsearch.",
     "Tags": ["elasticsearch", "autocomplete", "search"],
     "Views": 190,
-    "PublishedDate": "2026-01-20T12:15:00Z",
+    "PublishedDate": "2026-01-03T12:15:00Z",
     "Comments": [
       {"User": "Uma", "Text": "Helpful tips.", "Likes": 2},
       {"User": "Victor", "Text": "Works perfectly.", "Likes": 3}

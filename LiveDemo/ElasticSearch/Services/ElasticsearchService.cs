@@ -3,6 +3,7 @@ using Elastic.Clients.Elasticsearch.Core.Bulk;
 using Elastic.Clients.Elasticsearch.Core.Search;
 using Elastic.Clients.Elasticsearch.IndexManagement;
 using Elastic.Clients.Elasticsearch.Mapping;
+using Elastic.Clients.Elasticsearch.QueryDsl;
 using Elastic.Clients.Elasticsearch.Security;
 using ElasticSearch;
 using ElasticSearch.Models;
@@ -288,7 +289,28 @@ public partial class ElasticsearchService(
                     )
                 )
             )
+            .Size(1000)
         );
+        return searchResponse.Documents.ToList();
+    }
+
+    public async Task<List<WebPage>> GetRecentContent(TimeSpan timeSpan)
+    {
+        var searchResponse = await userClient.Client.SearchAsync<WebPage>(s => s
+            .Indices(DefaultIndex)
+            .Query(q => q
+                .Range(new DateRangeQuery
+                {
+                    Field = Infer.Field<WebPage>(f => f.PublishedDate),
+                    Gte = DateMath.Now.Subtract(timeSpan)
+                })
+            )
+            .Sort(so => so
+                .Field(f => f.PublishedDate, SortOrder.Desc)
+            )
+            .Size(1000)
+        );
+        
         return searchResponse.Documents.ToList();
     }
     

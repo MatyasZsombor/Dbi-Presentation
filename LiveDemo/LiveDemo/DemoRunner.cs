@@ -38,6 +38,7 @@ public class DemoRunner(IServiceScopeFactory scopeFactory) : IHostedService
         await RunExample(() => elasticsearchService.GetAverageViewsOfTag("tutorial"), "Example seven");
         await RunExample(() => elasticsearchService.GetMostCommonTags(5), "Example eight");
         await RunExample(() => elasticsearchService.FindPagesWithHighlyLikedComments(), "Example nine");
+        await RunExample(() => elasticsearchService.GetRecentContent(TimeSpan.FromDays(1)), "Example ten");
     }
 
     private static async Task RunExample<T>(Func<Task<T>> asyncFunction, string exampleName = "")
